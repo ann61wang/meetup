@@ -7,6 +7,7 @@ class MeetupsController < ApplicationController
 
   def show
     @meetup = Meetup.find(params[:id])
+    @comments = @meetup.comments
   end
 
   def edit
@@ -52,7 +53,7 @@ class MeetupsController < ApplicationController
     if current_user != @meetup.user
       redirect_to root_path, alert: "You have no permission"
     end
-    
+
     @meetup.destroy
     flash[:alert] = "Meetup deleted"
     redirect_to meetups_path
