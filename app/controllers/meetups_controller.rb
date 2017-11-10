@@ -1,5 +1,5 @@
 class MeetupsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destory]
+  before_action :authenticate_user!, only: [ :new, :create, :edit, :update, :destory]
 
   def index
     @meetups = Meetup.all
