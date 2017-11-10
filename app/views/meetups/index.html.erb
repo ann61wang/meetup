@@ -8,6 +8,7 @@
         <td>#</td>
         <td>Title</td>
         <td>Description</td>
+        <td>Creator</td>
       </tr>
     </thead>
     <tbody>
@@ -16,6 +17,7 @@
           <td>#</td>
           <td><%= link_to(meetup.title, meetup_path(meetup)) %></td>
           <td><%= meetup.description %></td>
+          <td><%= meetup.user.email %></td>
           <td>
               <%= link_to("Edit", edit_meetup_path(meetup), class: "btn btn-sm btn-default")%>
               <%= link_to("Delete", meetup_path(meetup),    class: "btn btn-sm btn-default",
