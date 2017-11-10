@@ -2,17 +2,21 @@
     <h2>新增meetup</h2>
 
     <hr>
-    <%= form_for @meetup do |f| %>
+    <%= simple_form_for @meetup do |f| %>
 
-    地点
-    <%= f.text_field :title %>
-    <br>
-    内容
-    <br>
-    <%= f.text_area :description %>
-    <br>
+    <% if @meetup.errors.any? %>
+    <ul>
+      <% @meetup.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+    <% end %>
 
-    <%= f.submit "Submit", :disable_with => 'Submitting...' %>
+    <div class="form-meetup">
+      <%= f.input :title, input_html: { class: "form-control"} %>
+      <%= f.input :description, input_html: { class: "form-control"} %>
+    </div>
+    <%= f.submit "Submit", class: "btn btn-primary", data: {disable_with: "Submiting..."} %>
     <% end %>
 
 </div>

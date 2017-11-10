@@ -17,17 +17,21 @@ class MeetupsController < ApplicationController
 
   def create
     @meetup = Meetup.new(meetup_params)
-    @meetup.save
 
-    redirect_to meetups_path
+    if @meetup.save
+      redirect_to meetups_path
+    else
+      render :new
+    end
   end
 
   def update
     @meetup = Meetup.find(params[:id])
-
-    @meetup.update(meetup_params)
-
-    redirect_to meetups_path, notice: "Update Success"
+    if @meetup.update(meetup_params)
+      redirect_to meetups_path, notice: "Update Success"
+    else
+      render :edit
+    end
   end
 
   def destroy
