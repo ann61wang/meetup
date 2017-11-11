@@ -1,0 +1,22 @@
+<div class="col-md-4 col-md-offset-4">
+    <h2>新增meetup</h2>
+
+    <hr>
+    <%= simple_form_for @meetup do |f| %>
+
+    <% if @meetup.errors.any? %>
+    <ul>
+      <% @meetup.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+    <% end %>
+
+    <div class="form-meetup">
+      <%= f.input :title, input_html: { class: "form-control"} %>
+      <%= f.input :description, input_html: { class: "form-control"} %>
+    </div>
+    <%= f.submit "Submit", class: "btn btn-primary", data: {disable_with: "Submiting..."} %>
+    <% end %>
+
+</div>
