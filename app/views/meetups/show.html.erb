@@ -1,7 +1,39 @@
 <div class="col-md-12">
   <div class="meetup">
-    <%= link_to("Edit", edit_meetup_path(@meetup), class: "btn btn-primary pull-right")%>
+    <% if current_user && current_user == @meetup.user %>
+      <%= link_to("Edit", edit_meetup_path(@meetup), class: "btn btn-primary pull-right")%>
+    <% end %>
   </div>
   <h2><%= @meetup.title %></h2>
   <p><%= @meetup.description %></p>
+
+  <% if @comments.empty? %>
+    <p> 尚未有人留言 </p>
+  <% else %>
+
+  <% @floor = 1 %>
+  <table class="table">
+    <thead>
+     <tr>
+        <th>楼层</th>
+        <th>留言</th>
+        <th>发表者</th>
+        <th>发表时间</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @comments.each do |comment| %>
+        <tr>
+          <td><%= @floor %>楼</td>
+            <% @floor += 1 %>
+          <td><%= comment.content %></td>
+          <td><%= comment.user.email %></td>
+          <td><%= comment.created_at.strftime("%Y/%m/%d %I:%M %p") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% end %>
+
+  <%= render 'comment_form' %>
 </div>
